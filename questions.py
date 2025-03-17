@@ -1,4 +1,6 @@
 import random
+# inicializo puntaje
+puntaje = 0.0
 # Preguntas para el juego
 questions = [
 "¿Qué función se usa para obtener la longitud de una cadena en Python?",
@@ -32,21 +34,25 @@ for _ in range(3):
         print(f"{i + 1}. {answer}")
 # El usuario tiene 2 intentos para responder correctamente
     for intento in range(2):
-        user_answer = int(input("Respuesta: ")) - 1
-# Se verifica si la respuesta es correcta
+        try: 
+            user_answer = int(input("Respuesta: ")) - 1
+        except ValueError:
+            print("Respuesta no válida. Debes ingresar un número.")
+            continue 
+            # Vuelve a pedir la respuesta si no es un número válido
+        if user_answer < 0 or user_answer > 3:
+            print ('Respuesta no valida')
+            continue
         if user_answer == correct_answers_index[question_index]:
             print("¡Correcto!")
+            puntaje = puntaje + 1
             break
-        elif user_answer < 1 or user_answer > 4:
-            print ('Respuesta no valida')
-            break
-        elif user_answer != int:
-            print ('Respuesta no valida')
-            break
-    else:
+        else:
 # Si el usuario no responde correctamente después de 2 intentos,
 # se muestra la respuesta correcta
-        print("Incorrecto. La respuesta correcta es:")
-        print(answers[question_index] [correct_answers_index[question_index]])
+            puntaje = puntaje - 0.5 
+            print("Incorrecto. La respuesta correcta es:")
+            print(answers[question_index] [correct_answers_index[question_index]])
 # Se imprime un blanco al final de la pregunta
 print()
+print ('El puntaje total obtenido es de: ', puntaje)
